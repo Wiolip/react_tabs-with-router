@@ -11,21 +11,15 @@ export const Navigation: React.FC = () => {
     >
       <div className="container">
         <div className="navbar-brand">
-          <Link
-            to="/"
-            className={`navbar-item ${pathname === '/' ? 'is-active' : ''}`}
-          >
-            Home
-          </Link>
+          <div className={`navbar-item ${pathname === '/' ? 'is-active' : ''}`}>
+            <Link to="/">Home</Link>
+          </div>
 
-          <Link
-            to="/tabs"
-            className={`navbar-item ${
-              pathname.startsWith('/tabs') ? 'is-active' : ''
-            }`}
+          <div
+            className={`navbar-item ${pathname.startsWith('/tabs') ? 'is-active' : ''}`}
           >
-            Tabs
-          </Link>
+            <Link to="/tabs">Tabs</Link>
+          </div>
         </div>
       </div>
     </nav>

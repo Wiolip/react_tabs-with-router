@@ -11,16 +11,17 @@ export const TabsPage: React.FC<Props> = ({ tabs }) => {
   const { tabId } = useParams<{ tabId: string }>();
 
   const selectedIndex = tabs.findIndex(tab => tab.id === tabId);
+  const safeIndex = selectedIndex === -1 ? undefined : selectedIndex;
 
   return (
     <>
       <h1 className="title">Tabs page</h1>
 
-      <Tabs selectedIndex={selectedIndex}>
+      <Tabs selectedIndex={safeIndex} selectedTabClassName="is-active">
         <div className="tabs is-boxed">
           <TabList>
             {tabs.map(tab => (
-              <Tab key={tab.id} data-cy="Tab" selectedClassName="is-active">
+              <Tab key={tab.id} data-cy="Tab">
                 <Link to={`/tabs/${tab.id}`}>{tab.title}</Link>
               </Tab>
             ))}
@@ -28,11 +29,11 @@ export const TabsPage: React.FC<Props> = ({ tabs }) => {
         </div>
 
         <div className="block" data-cy="TabContent">
-          {selectedIndex === -1 && <span>Please select a tab</span>}
-
-          {tabs.map(tab => (
-            <TabPanel key={tab.id}>{tab.content}</TabPanel>
-          ))}
+          {safeIndex === undefined ? (
+            <span>Please select a tab</span>
+          ) : (
+            tabs.map(tab => <TabPanel key={tab.id}>{tab.content}</TabPanel>)
+          )}
         </div>
       </Tabs>
     </>
