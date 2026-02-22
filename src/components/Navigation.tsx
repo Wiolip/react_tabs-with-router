@@ -1,5 +1,5 @@
 import React from 'react';
-import { NavLink, useLocation } from 'react-router-dom';
+import { Link, useLocation } from 'react-router-dom';
 
 export const Navigation: React.FC = () => {
   const { pathname } = useLocation();
@@ -11,19 +11,21 @@ export const Navigation: React.FC = () => {
     >
       <div className="container">
         <div className="navbar-brand">
-          <NavLink
+          <Link
             to="/"
             className={`navbar-item ${pathname === '/' ? 'is-active' : ''}`}
           >
             Home
-          </NavLink>
+          </Link>
 
-          <NavLink
+          <Link
             to="/tabs"
-            className={`navbar-item ${pathname.startsWith('/tabs') ? 'is-active' : ''}`}
+            className={`navbar-item ${
+              pathname.startsWith('/tabs') ? 'is-active' : ''
+            }`}
           >
             Tabs
-          </NavLink>
+          </Link>
         </div>
       </div>
     </nav>
